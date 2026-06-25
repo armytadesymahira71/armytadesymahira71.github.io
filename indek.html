@@ -1,164 +1,439 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Saya</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil — Armyta Desy</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+  :root {
+    --bg: #F7F5FF;
+    --card: #ffffff;
+    --text: #1a1033;
+    --muted: #6b6080;
+    --purple: #7B5EA7;
+    --purple-light: #EDE9FF;
+    --teal: #2DD4BF;
+    --coral: #FF6B6B;
+    --amber: #FFBE5C;
+    --green: #4ADE80;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
 
-        .profile-card {
-            background: rgba(255, 255, 255, 0.95);
-            max-width: 450px;
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            text-align: center;
-            padding: 40px 30px;
-            transition: transform 0.3s ease;
-        }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
 
-        .profile-card:hover {
-            transform: translateY(-5px);
-        }
+  /* HERO */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6C3FC5 0%, #A855F7 50%, #EC4899 100%);
+    padding: 60px 24px 80px;
+    text-align: center;
+  }
 
-        .avatar {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
-        }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
 
-        .name {
-            font-size: 24px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
+  .blob {
+    position: absolute;
+    top: 20px; left: 30px;
+    width: 120px; height: 120px;
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+    background: rgba(255,255,255,0.07);
+  }
 
-        .bio {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 25px;
-            font-weight: 300;
-            line-height: 1.6;
-        }
+  .avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
 
-        /* Bagian Informasi Tambahan */
-        .info-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 25px;
-            text-align: left;
-        }
+  .avatar {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFBE5C, #FF6B6B);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px; font-weight: 800;
+    color: white;
+    border: 4px solid rgba(255,255,255,0.4);
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+  }
 
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #444;
-        }
+  .avatar-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255,255,255,0.4);
+    animation: spin 12s linear infinite;
+  }
 
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-        .info-item i {
-            width: 25px;
-            color: #6c5ce7;
-            margin-right: 10px;
-            font-size: 16px;
-        }
+  .badge-verified {
+    position: absolute;
+    bottom: 4px; right: 4px;
+    width: 28px; height: 28px;
+    background: #4ADE80;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 3px solid white;
+    z-index: 2;
+    font-size: 13px;
+    color: white;
+  }
 
-        /* Bagian Sosial Media */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
+  .hero h1 {
+    font-size: 30px; font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
 
-        .social-icon {
-            width: 45px;
-            height: 45px;
-            background: #f1f2f6;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-            text-decoration: none;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
+  .hero .role {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.18);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+    margin-bottom: 16px;
+  }
 
-        /* Warna Hover masing-masing Sosmed */
-        .social-icon.instagram:hover { background: #e1306c; color: #fff; }
-        .social-icon.linkedin:hover { background: #0077b5; color: #fff; }
-        .social-icon.github:hover { background: #333; color: #fff; }
-        .social-icon.twitter:hover { background: #1da1f2; color: #fff; }
-    </style>
+  .hero .tagline {
+    color: rgba(255,255,255,0.8);
+    font-size: 15px;
+    max-width: 320px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 480px;
+    margin: -32px auto 0;
+    padding: 0 16px 60px;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+    border: 1.5px solid rgba(108, 63, 197, 0.08);
+    box-shadow: 0 2px 16px rgba(108, 63, 197, 0.06);
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .stat-box {
+    border-radius: var(--radius-sm);
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .stat-box.purple { background: #EDE9FF; }
+  .stat-box.teal   { background: #CCFBF1; }
+  .stat-box.amber  { background: #FEF3C7; }
+
+  .stat-num {
+    font-size: 22px; font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-box.purple .stat-num { color: #6C3FC5; }
+  .stat-box.teal   .stat-num { color: #0F766E; }
+  .stat-box.amber  .stat-num { color: #B45309; }
+
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  /* SOCIAL */
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .social-btn:last-child { margin-bottom: 0; }
+
+  .social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+
+  .social-btn.instagram {
+    background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF);
+    color: white;
+  }
+
+  .social-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .social-info { flex: 1; text-align: left; }
+  .social-handle { font-size: 13px; opacity: 0.85; font-weight: 400; }
+
+  .social-arrow {
+    font-size: 16px;
+    opacity: 0.7;
+  }
+
+  /* INFO LIST */
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #F3F0FF;
+  }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-row:first-child { padding-top: 0; }
+
+  .info-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .info-icon.purple { background: #EDE9FF; color: #6C3FC5; }
+  .info-icon.teal   { background: #CCFBF1; color: #0F766E; }
+  .info-icon.coral  { background: #FFE4E4; color: #C0392B; }
+  .info-icon.amber  { background: #FEF3C7; color: #B45309; }
+  .info-icon.blue   { background: #DBEAFE; color: #1D4ED8; }
+  .info-icon.green  { background: #DCFCE7; color: #15803D; }
+
+  .info-content { flex: 1; }
+  .info-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .info-value { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 1px; }
+
+  /* SKILLS */
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 13px; font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  .tag-purple { background: #EDE9FF; color: #6C3FC5; }
+  .tag-teal   { background: #CCFBF1; color: #0F766E; }
+  .tag-coral  { background: #FFE4E4; color: #C0392B; }
+  .tag-amber  { background: #FEF3C7; color: #B45309; }
+  .tag-blue   { background: #DBEAFE; color: #1D4ED8; }
+  .tag-green  { background: #DCFCE7; color: #15803D; }
+  .tag-pink   { background: #FCE7F3; color: #9D174D; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding-bottom: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer span {
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .avatar-ring { animation: none; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="profile-card">
-        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400" alt="Foto Profil" class="avatar">
-        
-        <h1 class="name">Nama Lengkap Anda</h1>
-        <p class="bio">Web Designer & Content Creator yang suka berbagi info seputar teknologi dan desain digital.</p>
-        
-        <div class="info-section">
-            <div class="info-item">
-                <i class="fa-solid fa-briefcase"></i>
-                <span>Pekerjaan / Status Saat Ini</span>
-            </div>
-            <div class="info-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Jakarta, Indonesia</span>
-            </div>
-            <div class="info-item">
-                <i class="fa-solid fa-envelope"></i>
-                <span>emailanda@domain.com</span>
-            </div>
-        </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="blob"></div>
+  <div class="avatar-wrap">
+    <div class="avatar-ring"></div>
+    <div class="avatar">AD</div>
+    <div class="badge-verified"><i class="ti ti-check" style="font-size:13px"></i></div>
+  </div>
+  <h1>Armyta Desy</h1>
+  <div class="role">
+    <i class="ti ti-building-community" style="font-size:14px"></i>
+    PNS · Pussiberad
+  </div>
+  <p class="tagline">Aparatur sipil negara yang berdedikasi melayani bangsa dengan sepenuh hati.</p>
+</div>
 
-        <div class="social-links">
-            <a href="https://instagram.com/username" target="_blank" class="social-icon instagram" title="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://linkedin.com/in/username" target="_blank" class="social-icon linkedin" title="LinkedIn">
-                <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/username" target="_blank" class="social-icon github" title="GitHub">
-                <i class="fa-brands fa-github"></i>
-            </a>
-            <a href="https://twitter.com/username" target="_blank" class="social-icon twitter" title="Twitter/X">
-                <i class="fa-brands fa-x-twitter"></i>
-            </a>
-        </div>
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-box purple">
+      <span class="stat-num">PNS</span>
+      <span class="stat-label">Status</span>
+    </div>
+    <div class="stat-box teal">
+      <span class="stat-num">TNI</span>
+      <span class="stat-label">Instansi</span>
+    </div>
+    <div class="stat-box amber">
+      <span class="stat-num">AD</span>
+      <span class="stat-label">Angkatan</span>
+    </div>
+  </div>
+
+  <!-- INFORMASI -->
+  <div class="card">
+    <div class="card-title">Informasi</div>
+
+    <div class="info-row">
+      <div class="info-icon purple"><i class="ti ti-user"></i></div>
+      <div class="info-content">
+        <div class="info-label">Nama Lengkap</div>
+        <div class="info-value">Armyta Desy</div>
+      </div>
     </div>
 
+    <div class="info-row">
+      <div class="info-icon teal"><i class="ti ti-building"></i></div>
+      <div class="info-content">
+        <div class="info-label">Satuan / Unit Kerja</div>
+        <div class="info-value">Pussiberad</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon coral"><i class="ti ti-briefcase"></i></div>
+      <div class="info-content">
+        <div class="info-label">Status Kepegawaian</div>
+        <div class="info-value">Pegawai Negeri Sipil (PNS)</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon amber"><i class="ti ti-map-pin"></i></div>
+      <div class="info-content">
+        <div class="info-label">Lokasi</div>
+        <div class="info-value">Jakarta, Indonesia</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon green"><i class="ti ti-circle-check"></i></div>
+      <div class="info-content">
+        <div class="info-label">Status</div>
+        <div class="info-value">Aktif Bertugas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL MEDIA -->
+  <div class="card">
+    <div class="card-title">Social Media</div>
+    <a href="https://instagram.com/armytadesy" target="_blank" class="social-btn instagram">
+      <div class="social-icon"><i class="ti ti-brand-instagram"></i></div>
+      <div class="social-info">
+        <div>Instagram</div>
+        <div class="social-handle">@armytadesy</div>
+      </div>
+      <i class="ti ti-arrow-right social-arrow"></i>
+    </a>
+  </div>
+
+  <!-- KEAHLIAN -->
+  <div class="card">
+    <div class="card-title">Bidang & Keahlian</div>
+    <div class="skill-tags">
+      <span class="skill-tag tag-purple">Administrasi</span>
+      <span class="skill-tag tag-teal">Pemerintahan</span>
+      <span class="skill-tag tag-coral">Pelayanan Publik</span>
+      <span class="skill-tag tag-amber">Manajemen</span>
+      <span class="skill-tag tag-blue">Koordinasi</span>
+      <span class="skill-tag tag-green">Komunikasi</span>
+      <span class="skill-tag tag-pink">Pengarsipan</span>
+    </div>
+  </div>
+
+  <!-- TENTANG -->
+  <div class="card" style="background: linear-gradient(135deg, #6C3FC5, #A855F7); border: none;">
+    <p style="color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;">Tentang Saya</p>
+    <p style="color: white; font-size: 15px; line-height: 1.7; font-weight: 400;">
+      Seorang aparatur sipil negara yang bertugas di lingkungan Pussiberad, berkomitmen untuk memberikan pelayanan terbaik dan berkontribusi nyata bagi kemajuan bangsa dan negara Indonesia.
+    </p>
+  </div>
+
+  <div class="footer">
+    <span><i class="ti ti-heart" style="color: #E91E63;"></i> Dibuat dengan bangga &nbsp;·&nbsp; &copy; Armyta Desy 2025</span>
+  </div>
+
+</div>
 </body>
 </html>
